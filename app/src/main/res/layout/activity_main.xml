@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto Silent Pro"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnStartTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Start Time"/>
+
+        <Button
+            android:id="@+id/btnEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set End Time"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schedule not set"
+            android:textStyle="italic"/>
+
+        <EditText
+            android:id="@+id/etWhitelist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Whitelist number (only one)"
+            android:inputType="phone"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save and Activate"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+</ScrollView>
