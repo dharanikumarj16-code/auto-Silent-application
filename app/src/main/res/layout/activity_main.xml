@@ -1,58 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
+        <!-- Header -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Auto Silent Pro"
             android:textSize="26sp"
-            android:textStyle="bold"/>
-
-        <Button
-            android:id="@+id/btnStartTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Set Start Time"/>
-
-        <Button
-            android:id="@+id/btnEndTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Set End Time"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold"
+            android:textColor="#0F172A" />
 
         <TextView
-            android:id="@+id/tvStatus"
-            android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Schedule not set"
-            android:textStyle="italic"/>
+            android:text="Smart School/College Timetable &amp; Emergency Bypass"
+            android:textSize="13sp"
+            android:textColor="#64748B"
+            android:layout_marginBottom="14dp" />
 
-        <EditText
-            android:id="@+id/etWhitelist"
+        <!-- Card: Live Ringer State & Instant Silent Control -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Whitelist number (only one)"
-            android:inputType="phone"
-            android:layout_marginTop="16dp"/>
+            android:orientation="vertical"
+            android:background="#F1F5F9"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
 
-        <Button
-            android:id="@+id/btnSave"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📱 Live Sound Mode"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#475569" />
+
+            <TextView
+                android:id="@+id/tvCurrentRingerState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Mode: 🔔 NORMAL"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#059669"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnManualSilent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🔕 Silence Now"
+                    android:backgroundTint="#EF4444"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnManualNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🔔 Normal Sound"
+                    android:backgroundTint="#10B981"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Card: Timetable / Schedule -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save and Activate"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"/>
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📅 College / School Hours"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnStartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start: 09:00"
+                    android:backgroundTint="#3B82F6"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnEndTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End: 16:30"
+                    android:backgroundTint="#3B82F6"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule: 09:00 → 16:30 (Active)"
+                android:textColor="#059669"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnSaveSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save &amp; Activate Schedule"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#10B981"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Card: GPS Geofence College Location -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍 College GPS Geofence Mode"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Automatically silences phone when entering your campus boundaries."
+                android:textSize="12sp"
+                android:textColor="#64748B"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etLatitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Latitude"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_marginEnd="4dp" />
+
+                <EditText
+                    android:id="@+id/etLongitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Longitude"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etRadius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Geofence Radius (meters, default: 200m)"
+                android:inputType="number"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnGetCurrentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎯 Get My Current GPS Location"
+                android:backgroundTint="#0EA5E9"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvGeofenceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Geofence: Not configured"
+                android:textColor="#64748B"
+                android:textStyle="italic"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnSaveGeofence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save &amp; Activate Campus Geofence"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#8B5CF6"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Card: Emergency Rules Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#EFF6FF"
+            android:padding="14dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚨 Emergency Unsilence Rules"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#1E40AF"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Emergency Contacts (Father, Mother, Sis...): 3 calls in 5 mins ➔ Rings Loud"
+                android:textSize="13sp"
+                android:textColor="#1E3A8A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Unknown / Other Numbers: 5 calls in 5 mins ➔ Rings Loud"
+                android:textSize="13sp"
+                android:textColor="#1E3A8A"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <!-- Card: Emergency Contacts Manager -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👨‍👩‍👧 Emergency Contacts List"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etContactName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Relationship / Name (e.g., Father, Mother)"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/etContactPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone number (e.g., 9876543210)"
+                android:inputType="phone"
+                android:layout_marginBottom="10dp" />
+
+            <Button
+                android:id="@+id/btnAddContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+ Add Emergency Contact"
+                android:backgroundTint="#6366F1"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saved Contacts:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="#475569"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Dynamic contacts container -->
+            <LinearLayout
+                android:id="@+id/layoutContactsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/tvNoContacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No emergency contacts added yet."
+                android:textSize="13sp"
+                android:textColor="#94A3B8"
+                android:fontStyle="italic" />
+        </LinearLayout>
+
+        <!-- Card: Live Emergency Simulator (For Viva / Demo / Testing) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FEF2F2"
+            android:padding="16dp"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧪 Demo &amp; Viva Testing Simulator"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#991B1B"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Instantly test emergency loud-ring bypass without needing real incoming calls."
+                android:textSize="12sp"
+                android:textColor="#7F1D1D"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnSimulateFamilyEmergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚡ Simulate 3rd Family Call (Trigger Alert)"
+                android:backgroundTint="#DC2626"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnSimulateUnknownEmergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📞 Simulate 5th Unknown Call (Trigger Alert)"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#EA580C"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnStopEmergencyRing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🛑 Reset to Silent Mode"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#475569"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
