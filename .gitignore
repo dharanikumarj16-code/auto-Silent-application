@@ -12,5 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+# Ignore build APKs but keep shareable APK
+app/build/
 *.apk
+!apk/AutoSilentPro.apk
