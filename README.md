@@ -14,7 +14,7 @@
 
 You can download and install the application directly on your Android phone without needing Android Studio:
 
-👉 **[Download AutoSilentPro.apk](apk/AutoSilentPro.apk)** *(Ready to install)*
+👉 **[Click Here to Download AutoSilentPro.apk](https://github.com/dharanikumarj16-code/auto-Silent-application/raw/master/apk/AutoSilentPro.apk)** *(Direct 1-Tap Mobile Download)*
 
 ---
 
